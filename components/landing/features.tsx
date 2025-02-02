@@ -43,10 +43,10 @@ const features: Feature[] = [
 const FeatureCard = ({ feature }: { feature: Feature }) => {
   return (
     <Card
-      className={`${feature.bgColor} border-none shadow-lg hover:shadow-xl transition-shadow max-w-[500px] p-5 sm:p-2`}
+      className={`${feature.bgColor} border-none shadow-lg hover:shadow-xl transition-shadow max-w-[500px] p-5 `}
     >
-      <CardContent className="p-6 space-y-4 m-auto w-fit">
-        <div className="max-w-xl h-52 relative mb-4">
+      <CardContent className="p-6 space-y-4 m-auto w-fit sm:p-1">
+        <div className="max-w-xl h-52 relative mb-4 sm:h-32">
           <Image
             src={feature.icon}
             alt={feature.title}
@@ -81,7 +81,7 @@ const FeaturesSection = () => {
           <span className="text-white font-semibold text-xl block mb-10 bg-[#E15D25] w-fit py-3 px-3 rounded-lg my-5">
             Features
           </span>
-          <h2 className="text-white text-3xl md:text-4xl font-bold mb-12">
+          <h2 className="text-white lg:text-3xl md:text-xl font-bold lg:mb-12 sm:mb-5">
             Maximize your restaurant&apos;s  <br className="my-6"/>
             <span className="text-[#E15D25]">revenue</span> with our streamlined <br className="mb-6"/>
             operations

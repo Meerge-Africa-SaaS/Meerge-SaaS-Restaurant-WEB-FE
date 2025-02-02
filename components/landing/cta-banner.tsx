@@ -4,9 +4,12 @@ import Link from "next/link";
 import { MessageSquare } from "lucide-react";
 
 const CTABanner = () => {
+  const routeToMemoForm = () => {
+    window.open("/restaurant/memoForm", "_blank");
+  };
   return (
     <section
-      className="section container mx-auto"
+      className="section container w-full"
       style={{
         backgroundImage:
           "linear-gradient(to bottom, rgb(35 37 41 / 53%), rgb(35 37 41 / 53%)), url('/assets/bar-man.png')",
@@ -28,12 +31,13 @@ const CTABanner = () => {
           <Button
             asChild
             variant="secondary"
-            className="mt-5 flex items-center gap-2 justify-center text-white py-2 px-3 w-fit rounded-lg"
-          >
-            <Link href="https://forms.gle/PVNCmsyiQgdUC7KG9">
+            className="mt-5 flex items-center gap-2 px-8 py-2 text-white hover:bg-secondary/50 transition-colors bg-[#FF4101] w-fit"
+            onClick={routeToMemoForm}
+          >Request Demo
+            {/* <Link href="https://forms.gle/PVNCmsyiQgdUC7KG9">
               Request Demo
               <MessageSquare className="ml-2 h-4 w-4" />
-            </Link>
+            </Link> */}
           </Button>
         </div>
       </div>

@@ -32,7 +32,7 @@ const HomePage = () => {
 
         <FeatureCarousel />
       </section>
-      <div className="px-10">
+      <div className="lg:px-10 sm:px-0">
         <FeaturesSection />
         <GrowthSection />
       </div>
