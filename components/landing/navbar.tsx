@@ -5,6 +5,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import LoginBtn from "../btns/login-btn";
 
 interface NavLink {
   text: string;
@@ -84,6 +85,7 @@ const Navbar = () => {
               </Link>
             )
           )}
+          <LoginBtn isScrolled={isScrolled}/>
         </div>
 
         {/* Mobile Menu */}
