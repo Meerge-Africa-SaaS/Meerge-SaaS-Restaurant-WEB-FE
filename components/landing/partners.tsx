@@ -41,31 +41,29 @@ const PartnersSection = () => {
   return (
     <section
       id="partners"
-      className="section z-20 relative container mx-auto px-6 py-6 bg-[#f3f5f7]"
+      className="section z-20 relative container mx-auto px-6 py-6 bg-[#f3f5f7] my-20"
     >
-      <span className="text-secondary font-semibold text-lg block">
+      <span className="text-white font-semibold text-xl block mb-10 bg-[#E15D25] w-fit py-3 px-3 rounded-lg my-5">
         Trusted Partners
       </span>
 
       <div className="grid grid-cols-3 gap-4 w-full mt-10 pb-28">
-        {partners.map((partner, index) => (
-          <div
-            key={index}
-            className={`flex justify-center items-center ${
-              partner.addTopMargin ? "mt-8" : ""
-            }`}
-          >
-            <div className="relative w-32 h-16">
-              <Image
-                src={partner.logo}
-                alt={`${partner.name} logo`}
-                fill
-                className="object-contain"
-              />
-            </div>
-          </div>
-        ))}
-      </div>
+  {partners.map((partner, index) => (
+    <div
+      key={index}
+      className={`flex justify-center items-center ${
+        partner.addTopMargin ? "mt-8" : ""
+      }`}
+    >
+        <img
+          src={partner.logo}
+          alt={`${partner.name} logo`}
+          className="object-cover"
+        />
+    </div>
+  ))}
+</div>
+
     </section>
   );
 };

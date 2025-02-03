@@ -1,37 +1,48 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import { ClassNames } from "@emotion/react";
 
 interface Testimonial {
   content: string;
   name: string;
-  role: string;
+  role?: string;
 }
 
 const testimonials: Testimonial[] = [
   {
     content:
-      "I can say my business have found an easy to use product with Meerge solution. The process of getting my staff to learn how it works was pretty simple.",
+      "I can say my business has found an easy-to-use product with Meerge solution. The process of getting my staff to learn how it works was pretty simple.",
     name: "Akani",
     role: "Business Owner",
   },
   {
     content:
-      "At first, we needed to understand how Meerge was going to help us with operations before getting onboard. I believe we made a good decision to.",
+      "At first, we needed to understand how Meerge was going to help us with operations before getting onboard. I believe we made a good decision too.",
     name: "Olayemi",
-    role: "Resturant Manager",
+    role: "Restaurant Manager",
   },
   {
     content:
       "We started talking with the Customer team and it didn't take long for us to conclude on using Meerge to manage some of our routine business activities.",
     name: "Chef Janet",
-    role: "",
   },
 ];
 
-const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
+const TestimonialCard = ({
+  testimonial,
+  index,
+}: {
+  testimonial: Testimonial;
+  index: number;
+}) => {
   return (
-    <Card className="h-auto bg-white text-black hover:shadow-lg transition-shadow">
-      <CardContent className="p-6 flex flex-col justify-between h-full">
+    <div className="relative">
+    <Card
+      className={`h-auto bg-white text-black hover:shadow-lg transition-shadow ${
+        index === 1 ? "lg:absolute top-20 text-center" : "text-center"
+      }`}
+    >
+      <CardContent className="p-6 flex flex-col justify-between gap-10 h-full">
         <p className="text-gray-700 mb-6 italic">
           &quot;{testimonial.content}&quot;
         </p>
@@ -43,21 +54,24 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
         </div>
       </CardContent>
     </Card>
+    </div>
+    
   );
 };
 
 const TestimonialsSection = () => {
   return (
     <section className="section z-20 relative container mx-auto px-6 py-16">
-      <h2 className="text-center text-2xl font-semibold mb-16 w-full mt-20">
+      <h2 className="text-center font-medium mb-16 w-full mt-20 text-3xl md:text-4xl ">
         Here&apos;s what{" "}
         <span className="font-bold md:inline block">our trusted partners</span>{" "}
+        <br />
         <span className="block">say about us</span>
       </h2>
 
-      <div className="grid md:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-3 gap-10">
         {testimonials.map((testimonial, index) => (
-          <TestimonialCard key={index} testimonial={testimonial} />
+          <TestimonialCard key={index} testimonial={testimonial} index={index} />
         ))}
       </div>
     </section>

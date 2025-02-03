@@ -88,14 +88,14 @@ const GrowthSection = () => {
   return (
     <section
       id="growth-card"
-      className="section z-20 relative container mx-auto px-6 py-16"
+      className="section z-20 relative container mx-auto px-6 py-16 my-40"
     >
       <div>
         <span className="text-white font-semibold text-xl block mb-10 bg-[#E15D25] w-fit py-3 px-3 rounded-lg my-5">
           Growth
         </span>
         <h2 className="text-3xl md:text-4xl font-bold mb-12">
-          Enhance Your Restaurant&apos;s Profitability with Strategic Solutions
+          Enhance Your Restaurant&apos;s Profitability with <br /> Strategic Solutions
         </h2>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

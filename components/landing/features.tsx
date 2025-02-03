@@ -46,7 +46,7 @@ const FeatureCard = ({ feature }: { feature: Feature }) => {
       className={`${feature.bgColor} border-none shadow-lg hover:shadow-xl transition-shadow max-w-[500px] p-5 `}
     >
       <CardContent className="p-6 space-y-4 m-auto w-fit sm:p-1">
-        <div className="max-w-xl h-52 relative mb-4 sm:h-32">
+        <div className="max-w-xl h-72 relative mb-4 sm:h-32">
           <Image
             src={feature.icon}
             alt={feature.title}
@@ -65,7 +65,7 @@ const FeatureCard = ({ feature }: { feature: Feature }) => {
 
 const FeaturesSection = () => {
   return (
-    <section id="features" className="px-6 container mx-auto">
+    <section id="features" className="px-6 container mx-auto mt-10">
       <div
         className="section mx-auto container rounded-lg py-16 relative bg-no-repeat bg-cover p-6"
         style={{

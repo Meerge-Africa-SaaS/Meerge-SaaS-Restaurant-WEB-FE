@@ -154,7 +154,7 @@ const LoginForm = () => {
       {/* Sign Up Option */}
       <div className="mt-6 text-center text-sm">
         <span className="text-gray-600">Don&apos;t have an account? </span>
-        <Link href="/auth/signup" className="text-secondary hover:underline">
+        <Link href="/restaurant/signup" className="text-secondary hover:underline">
           Sign up
         </Link>
       </div>
