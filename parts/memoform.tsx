@@ -3,253 +3,172 @@
 import * as React from "react";
 import { useZodForm } from "@/lib/hooks/form";
 import { MemoFormSchema } from "@/lib/zod/forms/signup";
-import {
-  Select,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-  SelectLabel,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import Logo from "@/components/ui/logo";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { PhoneInput } from "@/components/ui/phone";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
+
+const featureOptions = ["POS", "Customized Site", "Mobile App", "Integration", "Stock Manager", "Operations-Control"];
+const sessionTimes = ["9am-11am", "12pm-2pm", "3pm-5pm", "6pm-8pm"];
+const availableDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const heardAboutOptions = ["Word of Mouth", "Pitch", "Google", "Blog", "Facebook", "Instagram", "WhatsApp", "X"];
 
 const MemoFormScreen = () => {
-  const form = useZodForm({
-    schema: MemoFormSchema,
+  const form = useZodForm({ schema: MemoFormSchema });
+
+  const handleSubmit = form.handleSubmit(async (data) => {
+    console.log(data);
   });
 
   return (
-    <div className="  ">
+    <div className="max-w-xl mx-auto px-4 py-10">
       <Logo />
       <h1 className="text-3xl font-bold text-center">Book A Demo Session</h1>
-      <p className="text-[#FF4101] text-lg text-center">
-        See what our solution can do for your business.
-      </p>
-      <form className="max-w-xl m-auto mt-10">
-        <div>
-          <label htmlFor="fullname" className="block">
-            Full Name
-          </label>
-          <input
-            id="fullname"
-            type="text"
-            className="mt-2 w-full border border-gray-300 px-4 py-2 rounded-2xl mb-5"
-            placeholder="Enter Your Business Name"
-            {...form.register("fullname")}
-          />
-        </div>
+      <p className="text-[#FF4101] text-lg text-center">See what our solution can do for your business.</p>
 
-        <div>
-          <label htmlFor="emailAddress" className="block ">
-            Email
-          </label>
-          <input
-            id="emailAddress"
-            type="email"
-            className="mt-2 w-full border border-gray-300 px-4 py-2 rounded-2xl mb-5"
-            placeholder="Enter Your Business Email"
-            {...form.register("emailAddress")}
-          />
-        </div>
+      <Form {...form}>
+        <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+          {/* Full Name */}
+          <FormField name="fullname" control={form.control} render={({ field }) => (
+            <FormItem>
+              <FormLabel className="required">Full Name</FormLabel>
+              <FormControl>
+                <Input className="rounded-2xl" {...field} placeholder="Enter Your Full Name" />
+              </FormControl>
+            </FormItem>
+          )} />
 
-        <div>
-          <label htmlFor="phoneNumber" className="block ">
-            Phone Number
-          </label>
-          <input
-            id="phoneNumber"
-            type="text"
-            className="mt-2 w-full border border-gray-300 px-4 py-2 rounded-xl mb-5"
-            placeholder="Enter Your Business Email"
-            {...form.register("phoneNumber")}
-          />
-        </div>
+          {/* Email Address */}
+          <FormField name="emailAddress" control={form.control} render={({ field }) => (
+            <FormItem>
+              <FormLabel className="required">Email</FormLabel>
+              <FormControl>
+                <Input className="rounded-2xl" type="email" {...field} placeholder="Enter Your Email" />
+              </FormControl>
+            </FormItem>
+          )} />
 
-        <div>
-          <label htmlFor="restaurantName" className="block ">
-            Restaurant Name
-          </label>
-          <input
-            id="restaurantName"
-            type="text"
-            className="mt-2 w-full border border-gray-300 px-4 py-2 rounded-xl mb-5"
-            placeholder="Enter Your Restautrant Name"
-            {...form.register("restaurantName")}
-          />
-        </div>
+          {/* Phone Number */}
+          <FormField name="phoneNumber" control={form.control} render={({ field }) => (
+            <FormItem>
+              <FormLabel className="required">Phone Number</FormLabel>
+              <FormControl>
+                <PhoneInput value={field.value} onChange={field.onChange} />
+              </FormControl>
+            </FormItem>
+          )} />
 
-        <div>
-          <label htmlFor="restaurantAddress" className="block ">
-            Restaurant Address
-          </label>
-          <input
-            id="restaurantAddress"
-            type="text"
-            className="mt-2 w-full border border-gray-300 px-4 py-2 rounded-xl mb-5"
-            placeholder="Enter Your Restautrant Address"
-            {...form.register("restaurantAddress")}
-          />
-        </div>
+          {/* Restaurant Details */}
+          <FormField name="restaurantName" control={form.control} render={({ field }) => (
+            <FormItem>
+              <FormLabel className="required">Food Restaurant Name</FormLabel>
+              <FormControl>
+                <Input className="rounded-2xl" {...field} placeholder="Enter Restaurant Name" />
+              </FormControl>
+            </FormItem>
+          )} />
 
-        <div></div>
+          <FormField name="restaurantAddress" control={form.control} render={({ field }) => (
+            <FormItem>
+              <FormLabel className="required">Food Restaurant Address</FormLabel>
+              <FormControl>
+                <Input className="rounded-2xl" {...field} placeholder="Enter Restaurant Address" />
+              </FormControl>
+            </FormItem>
+          )} />
 
-        {/* Position */}
-        <div className="mb-5">
-          <label htmlFor="position" className="block text-[16px]">
-            Position
-          </label>
-          <RadioGroup
-            {...form.register("position")}
-            id="position"
-            name="position"
-            className="mt-2 w-[2px] flex gap-10"
-          >
-            <div className="text-xs flex items-center gap-2 border border-slate-600 rounded-2xl py-3 px-5">
-              <RadioGroupItem  value="owner" className="h-2 w-2"></RadioGroupItem>
-              <span>Owner</span>
-            </div>
-            <div className="text-xs flex items-center gap-2  border-slate-600 rounded-2xl py-3 px-5">
-              <RadioGroupItem value="staff" className="h-2 w-2"></RadioGroupItem>
-              <span>Staff</span>
-            </div>
-          </RadioGroup>
-        </div>
+          {/* Position */}
+          <FormField name="position" control={form.control} render={({ field }) => (
+            <FormItem>
+              <FormLabel>Position</FormLabel>
+              <FormControl>
+                <RadioGroup onValueChange={field.onChange} defaultValue={field.value} className="flex space-x-5">
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="owner" />
+                    <FormLabel className="font-normal">Owner</FormLabel>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="staff" />
+                    <FormLabel className="font-normal">Staff</FormLabel>
+                  </div>
+                </RadioGroup>
+              </FormControl>
+            </FormItem>
+          )} />
 
-        {/* Features */}
-        <div className="mb-5">
-          <Label htmlFor="features" className="block text-[14px] font-semibold">
-            What features do you want to use
-          </Label>
-          <RadioGroup
-            {...form.register("features")}
-            id="features"
-            name="features"
-            className="mt-2 w-full grid grid-cols-3 gap-4"
-          >
-            <div className="text-xs flex items-center gap-2">
-              <RadioGroupItem value="POS" className="h-2 w-2"></RadioGroupItem>Point of sale
-            </div>
-            <div className="text-xs flex items-center gap-2">
-              <RadioGroupItem value="Customized Site" className="h-2 w-2"></RadioGroupItem>
-              <span>Customized Sites</span>
-            </div>
-            <div className="text-xs flex items-center gap-2">
-              <RadioGroupItem value="Mobile App" className="h-2 w-2"></RadioGroupItem>
-              <span>Mobile App Integration</span>
-            </div>
-            <div className="text-xs flex items-center gap-2">
-              <RadioGroupItem value="Stock Manager" className="h-2 w-2"></RadioGroupItem>
-              <span>Stock Manager</span>
-            </div>
-            <div className="text-xs flex items-center gap-2">
-              <RadioGroupItem value="Integration" className="h-2 w-2"></RadioGroupItem>
-              <span>Insights-Pro</span>
-            </div>
-            <div className="text-xs flex items-center gap-2">
-              <RadioGroupItem value="Operations-Control" className="h-2 w-2"></RadioGroupItem>
-              <span>Operations-Control</span>
-            </div>
-          </RadioGroup>
-        </div>
-        {/* Demo Session Type */}
-        <div className="mb-5">
-          <Label
-            htmlFor="demoSessionType"
-            className="block font-semibold text-[16px]  "
-          >
-            How would you want your demo session?
-          </Label>
-          <RadioGroup
-            {...form.register("demoSessionType")}
-            id="demoSessionType"
-            name="demoSessionType"
-            className="mt-2 w-full flex items-center gap-20"
-          >
-            <div className="text-xs flex items-center gap-2">
-              <RadioGroupItem value="online"></RadioGroupItem>
-              <span>Online</span>
-            </div>
-            <div className="text-xs flex items-center gap-2">
-              <RadioGroupItem value="physical"></RadioGroupItem>
-              <span>Physical</span>
-            </div>
-          </RadioGroup>
-        </div>
-        <div>
-          <Select>
-            <SelectTrigger
-              id="timeAvailable"
-              //   name="timeAvailable"
-              className="mt-2 w-full h-12 rounded-xl mb-5"
-              {...form.register("timeAvailable")}
-            >
-              <SelectValue placeholder="Time Available" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="9am-11am">9am-11am</SelectItem>
-              <SelectItem value="12pm-2pm">12pm-2pm</SelectItem>
-              <SelectItem value="3pm-5pm">3pm-5pm</SelectItem>
-              <SelectItem value="6pm-8pm">6pm-8pm</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+          {/* Features Selection */}
+          <FormField name="features" control={form.control} render={() => (
+            <FormItem>
+              <FormLabel className="required">What features do you want to use?</FormLabel>
+              <div className="grid grid-cols-2 gap-2">
+                {featureOptions.map((feature) => (
+                  <div key={feature} className="flex items-center gap-2">
+                    <Checkbox
+                      id={feature}
+                      value={feature}
+                      onCheckedChange={(checked: any) => {
+                        const currentValues = form.getValues("features") || [];
+                        //@ts-ignore
+                        form.setValue("features", checked ? [...currentValues, feature] : currentValues.filter(f => f !== feature));
+                      }}
+                    />
+                    <label htmlFor={feature} className="text-sm">{feature}</label>
+                  </div>
+                ))}
+              </div>
+            </FormItem>
+          )} />
 
-        <div>
-          <Select>
-            <SelectTrigger
-              id="daysAvailable"
-              //   name="daysAvailable"
-              className="mt-2 w-full h-12 rounded-xl mb-5"
-              {...form.register("daysAvailable")}
-            >
-              <SelectValue placeholder="Select Days" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="monday">Monday</SelectItem>
-              <SelectItem value="tuesday">Tuesday</SelectItem>
-              <SelectItem value="wednesday">Wednesday</SelectItem>
-              <SelectItem value="thursday">Thursday</SelectItem>
-              <SelectItem value="friday">Friday</SelectItem>
-              <SelectItem value="saturday">Saturday</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+          {/* Demo Session Type */}
+          <FormField name="demoSessionType" control={form.control} render={() => (
+            <FormItem>
+              <Label className="block font-semibold">How would you want your demo session?</Label>
+              <RadioGroup className="flex space-x-10 mt-2">
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="online" />
+                  <span>Online</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="physical" />
+                  <span>Physical</span>
+                </div>
+              </RadioGroup>
+            </FormItem>
+          )} />
 
-        <div>
-          <p>How did you hear about us?</p>
-          <Select>
-            <SelectTrigger
-              id="heardAboutUs"
-              //   name="heardAboutUs"
-              className="mt-2 w-full h-12 rounded-xl mb-5"
-              {...form.register("heardAboutUs")}
-            >
-              <SelectValue placeholder="Please Select" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="word of mouth">Word of Mouth</SelectItem>
-              <SelectItem value="pitch">Pitch</SelectItem>
-              <SelectItem value="google">Google</SelectItem>
-              <SelectItem value="blog">Blog</SelectItem>
-              <SelectItem value="facebook">Facebook</SelectItem>
-              <SelectItem value="instagram">Instagram</SelectItem>
-              <SelectItem value="whatsapp">WhatsApp</SelectItem>
-              <SelectItem value="x">X</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+          {/* Availability Selections */}
+          {[{ name: "timeAvailable", options: sessionTimes, placeholder: "Time Available" },
+            { name: "daysAvailable", options: availableDays, placeholder: "Select Days" },
+            { name: "heardAboutUs", options: heardAboutOptions, placeholder: "How did you hear about us?" }]
+            .map(({ name, options, placeholder }) => (
+              //@ts-ignore
+              <FormField key={name} name={name} control={form.control} render={() => (
+                <FormItem>
+                  <Select>
+                    <SelectTrigger id={name} className="mt-2 w-full h-12 rounded-xl">
+                      <SelectValue placeholder={placeholder} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {options.map((option) => (
+                        <SelectItem key={option} value={option.toLowerCase()}>{option}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </FormItem>
+              )} />
+          ))}
 
-        <div className="mt-4">
-          <button
-            type="submit"
-            className="w-full bg-[#0E2254] font-semibold text-white py-2 rounded-md hover:bg-[#0e2254f6] hover:text-[#FF4101] text-center mb-40 mt-10"
-          >
+          {/* Submit Button */}
+          <Button type="submit" className="w-full bg-[#0E2254] text-white py-2 rounded-md hover:bg-[#0e2254f6] hover:text-[#FF4101] mt-5">
             Request Demo
-          </button>
-        </div>
-      </form>
+          </Button>
+        </form>
+      </Form>
     </div>
   );
 };
