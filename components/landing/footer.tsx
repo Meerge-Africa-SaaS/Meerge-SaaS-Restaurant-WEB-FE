@@ -77,7 +77,7 @@ const socialLinks: SocialLink[] = [
 
 const Footer = () => {
   return (
-    <footer className="bg-white">
+    <footer className="bg-white px-12">
       {/* Mobile Footer */}
       <div className="p-4 space-y-4 md:hidden">
         <Link href="/" className="logo block mb-6">

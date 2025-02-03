@@ -10,7 +10,7 @@ const CTABanner = () => {
 
   return (
     <section
-      className="section container w-full py-12"
+      className="section container  py-20"
       style={{
         backgroundImage: "url('/assets/bar-man.png')",
         backgroundSize: "cover",
@@ -24,7 +24,7 @@ const CTABanner = () => {
           never been more effortless.
         </h2>
 
-        <div className="md:w-fit mt-8 bg-primary p-4 md:p-8 rounded-lg space-y-4">
+        <div className="md:w-fit mt-8 bg-primary p-4 md:p-8 rounded-lg space-y-4 lg:mt-40">
           <p className="text-white text-lg">
             You&apos;re just one click away from getting <br />
             started.
