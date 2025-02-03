@@ -17,6 +17,7 @@ const products: Product[] = [
     description:
       "Connect to our pool of suppliers to get access to quality ingredients for all your kitchen resources at a fair and competitive market price.",
     image: "/assets/tomato-img.png",
+    learnMoreUrl: "https://kittchens.com/",
   },
   {
     title: "Kittchen's Mobile",
@@ -51,12 +52,13 @@ const products: Product[] = [
     description:
       "Restaurants plug in immediate and future procurements for price friendly, quality supplies from our farms, so they can give their customers good meals at fair prices.",
     image: "/assets/farmer-img.png",
+    learnMoreUrl: "https://kittchens.com/",
   },
 ];
 
 const ProductCard = ({ product }: { product: Product }) => {
   return (
-    <Card className="bg-white overflow-hidden hover:shadow-xl transition-shadow">
+    <Card className="bg-white overflow-hidden hover:shadow-xl transition-shadow text-center">
       <div className="relative w-full aspect-[4/3]">
         <Image
           src={product.image}
@@ -76,7 +78,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           >
             <Button
               variant="link"
-              className="p-0 text-primary hover:text-primary/80"
+              className="p-3 mt-4  text-white hover:bg-secondary/50 transition-colors bg-[#FF4101]"
             >
               Learn More
             </Button>
@@ -98,7 +100,7 @@ const ProductsSection = () => {
   return (
     <section
       id="products"
-      className="container mx-auto md:min-w-full xl:min-w-[unset]"
+      className="container mx-auto md:min-w-full xl:min-w-[unset] my-40"
     >
       <div className="bg-primary mx-auto px-8 py-16 w-full md:px-20">
         <h2 className="text-2xl font-semibold text-center text-white mb-6">
