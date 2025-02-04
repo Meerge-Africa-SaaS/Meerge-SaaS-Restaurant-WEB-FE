@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { PhoneInput } from "@/components/ui/phone";
 import { PasswordInput } from "@/components/ui/password";
-import { useSignup, useVerifyEmail } from "@/services/auth";
+import { useResendEmail, useSignup, useVerifyEmail } from "@/services/auth";
 import { Checkbox } from "../ui/checkbox";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -27,20 +27,19 @@ export function RestaurantSignupForm() {
   const form = useZodForm({
     schema: RestaurantSignupFormSchema,
   });
+  
   const [isChecked, setIsChecked] = useState(false);
-  // const [phoneSignUpMessage, setPhoneSignupMessage]= useState({})
-  const [emailSignupMessage, setEmailSignupMessage] = useState("");
+  const [emailSignupSuccess, setEmailSignupSuccess] = useState(false);
+  const handleSuccess = (response:any) => {
+    setEmailSignupSuccess(true)
+  };
   const {
-    signupData,
     signupError,
     signupIsLoading,
     signupPayload,
-    signupIsSuccess,
-  } = useSignup();
-  const { verifyEmailError, verifyEmailIsLoading, verifyEmailPayload } =
-    useVerifyEmail((res: any) => {
-      setEmailSignupMessage(res);
-    });
+  } = useSignup(handleSuccess);
+  const { resendEmaiError, resendEmaiPayload, resendEmaiIsLoading } =
+    useResendEmail();
   const router = useRouter();
 
   const handleSubmit = form.handleSubmit(async (data) => {
@@ -58,24 +57,18 @@ export function RestaurantSignupForm() {
         actor_type: "restaurantowner",
         is_mobile: false,
       };
-      console.log("chek phone ", extendedData)
       signupPayload(extendedData);
     }
   });
 
   const verifyMail = () => {
-    const otp = generateOtp();
     const email = form.getValues("email");
     const token = "";
-    const mailVerificationPayload = { email, token };
-    verifyEmailPayload(mailVerificationPayload);
+    resendEmaiPayload(email);
   };
 
   useEffect(() => {
-    console.log("email response  ==>", emailSignupMessage);
-    console.log("email mail  ==>", form.getValues("email"));
-    console.log("email error  ==>", signupError);
-    if (signupError === messages.HANDLE_SUCCESS || signupError === "e is not a function") {
+    if (emailSignupSuccess) {
       verifyMail();
       localStorage.clear();
       Storage.set("email", form.getValues("email"));
