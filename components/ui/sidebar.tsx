@@ -512,7 +512,7 @@ const Sidebar = () => {
             />
             {!isCollapsed && (
               <span className="text-2xl text-white font-bold transition-opacity duration-300">
-                Meerge
+                {/* Meerge */}
               </span>
             )}
           </div>

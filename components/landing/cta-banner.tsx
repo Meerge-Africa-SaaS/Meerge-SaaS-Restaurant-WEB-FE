@@ -10,7 +10,7 @@ const CTABanner = () => {
 
   return (
     <section
-      className="section container  py-20"
+      className="py-20 px-20 mt-[-5rem]"
       style={{
         backgroundImage: "url('/assets/bar-man.png')",
         backgroundSize: "cover",
@@ -20,8 +20,8 @@ const CTABanner = () => {
     >
       <div className="py-10 px-8">
         <h2 className="text-2xl md:text-3xl text-white font-semibold">
-          Managing your restaurant has <br className="mb-4" />
-          never been more effortless.
+          Managing your restaurant has never been <br className="mb-4" />
+          more effortless.
         </h2>
 
         <div className="md:w-fit mt-8 bg-primary p-4 md:p-8 rounded-lg space-y-4 lg:mt-40">
