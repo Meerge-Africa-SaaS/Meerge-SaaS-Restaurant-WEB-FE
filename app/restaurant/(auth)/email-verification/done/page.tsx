@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 const EmailVerificationSuccessPage = () => {
   const router = useRouter()
   const goToSignin =()=>{
-    router.replace("/restaurant/login")
+    router.replace("/restaurant/onboarding")
   }
   return (
     <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-xl">

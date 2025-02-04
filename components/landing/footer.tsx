@@ -32,7 +32,7 @@ const footerSections: FooterSection[] = [
       { text: "Careers", href: "#" },
       { text: "Support", href: "#" },
       { text: "FAQs", href: "#" },
-      { text: "Privacy policy", href: "#" },
+      { text: "Privacy Policy", href: "#" },
     ],
   },
   {
@@ -77,32 +77,32 @@ const socialLinks: SocialLink[] = [
 
 const Footer = () => {
   return (
-    <footer className="bg-white px-12">
+    <footer className="bg-gray-100 text-gray-700 px-6 md:px-16 py-12">
       {/* Mobile Footer */}
-      <div className="p-4 space-y-4 md:hidden">
-        <Link href="/" className="logo block mb-6">
+      <div className="md:hidden space-y-6">
+        <Link href="/" className="logo">
           <Image
             src="/assets/Meerge-logo.svg"
-            alt="Meerge Africa Logo"
-            width={128}
-            height={48}
-            className="w-32"
+            alt="Meerge Logo"
+            width={80}
+            height={40}
+            className="w-20 h-auto ml-4"
           />
         </Link>
 
         <Accordion type="single" collapsible>
           {footerSections.map((section, index) => (
             <AccordionItem key={index} value={`item-${index}`}>
-              <AccordionTrigger className="font-semibold">
+              <AccordionTrigger className="font-semibold text-lg text-gray-800">
                 {section.title}
               </AccordionTrigger>
               <AccordionContent>
-                <div className="pl-4 pb-4 space-y-2">
+                <div className="pl-4 pb-4 space-y-3">
                   {section.links.map((link, linkIndex) => (
                     <Link
                       key={linkIndex}
                       href={link.href}
-                      className="block hover:text-secondary"
+                      className="block text-gray-600 hover:text-primary transition"
                     >
                       {link.text}
                     </Link>
@@ -113,9 +113,9 @@ const Footer = () => {
           ))}
         </Accordion>
 
-        <div className="pt-4">
-          <h3 className="font-semibold mb-2">Contact</h3>
-          <div className="space-y-2">
+        <div className="border-t pt-4">
+          <h3 className="font-semibold text-lg text-gray-800">Contact</h3>
+          <div className="space-y-1 text-gray-600">
             <p>hello@meergeafrica.com</p>
             <p>+234 813 918 8935</p>
           </div>
@@ -123,74 +123,79 @@ const Footer = () => {
       </div>
 
       {/* Desktop Footer */}
-      <div className="hidden px-4 md:flex flex-wrap justify-between">
-        <div className="space-y-8">
-          <Link href="/" className="logo">
+      <div className="hidden md:grid grid-cols-4 gap-12">
+        <div className="space-y-6">
+          <Link href="/" className="block">
             <Image
               src="/assets/Meerge-logo.svg"
               alt="Meerge Africa Logo"
-              width={48}
-              height={48}
-              className="h-12"
+              width={160}
+              height={50}
+              className="w-40"
             />
           </Link>
 
-          <div className="space-y-2">
-            <h3 className="font-semibold">Contact</h3>
+          <div className="text-gray-600 space-y-2">
+            <h3 className="font-semibold text-lg text-gray-800">Contact</h3>
             <p>hello@meergeafrica.com</p>
             <p>+234 813 918 8935</p>
           </div>
         </div>
 
         {footerSections.map((section, index) => (
-          <div key={index} className="space-y-4">
-            <h3 className="font-semibold text-primary">{section.title}</h3>
-            <div className="flex flex-col space-y-2">
+          <div key={index}>
+            <h3 className="font-semibold text-lg text-gray-800 mb-3">
+              {section.title}
+            </h3>
+            <ul className="space-y-2">
               {section.links.map((link, linkIndex) => (
-                <Link
-                  key={linkIndex}
-                  href={link.href}
-                  className="hover:text-secondary"
-                >
-                  {link.text}
-                </Link>
+                <li key={linkIndex}>
+                  <Link
+                    href={link.href}
+                    className="text-gray-600 hover:text-primary transition"
+                  >
+                    {link.text}
+                  </Link>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         ))}
       </div>
 
       {/* Social Media and Copyright */}
-      <div className="flex flex-col justify-left mt-16 px-4 socials">
-        <h3 className="font-semibold mb-4">Socials</h3>
-        <div className="flex mb-10">
-          {socialLinks.map((social, index) => (
-            <Link
-              key={index}
-              href={social.href}
-              className={index > 0 ? "mx-2" : ""}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image
-                src={social.icon}
-                alt={`${social.platform} icon`}
-                width={24}
-                height={24}
-              />
-            </Link>
-          ))}
+      <div className="mt-12 border-t pt-6 flex flex-col md:flex-row justify-between items-center">
+        <div>
+          <h3 className="font-semibold text-lg text-gray-800 mb-3">Socials</h3>
+          <div className="flex space-x-4">
+            {socialLinks.map((social, index) => (
+              <Link
+                key={index}
+                href={social.href}
+                className="hover:scale-110 transition transform"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  src={social.icon}
+                  alt={`${social.platform} icon`}
+                  width={32}
+                  height={32}
+                />
+              </Link>
+            ))}
+          </div>
         </div>
 
-        <div className="text-left text-sm">
-          <p className="mb-2">© 2024 Meerge Africa. All rights reserved</p>
-          <p>
-            <Link href="#" className="hover:text-secondary">
+        <div className="text-center md:text-right text-sm text-gray-600 mt-6 md:mt-0">
+          <p>© 2024 Meerge Africa. All rights reserved.</p>
+          <p className="mt-2">
+            <Link href="#" className="hover:text-primary transition">
               Privacy Policy
-            </Link>
-            {" | "}
-            <Link href="#" className="hover:text-secondary">
-              Terms of use
+            </Link>{" "}
+            |{" "}
+            <Link href="#" className="hover:text-primary transition">
+              Terms of Use
             </Link>
           </p>
         </div>
