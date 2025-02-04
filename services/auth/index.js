@@ -8,23 +8,27 @@ const httpService = new HttpService();
 const storage = new Storage()
 
 export const useSignup = (handleSuccess) => {
-  const { data, error, isPending, mutate ,isSuccess} = useMutateItem({
+  const { data, error, isPending, mutate, isSuccess } = useMutateItem({
     mutationFn: (payload) => httpService.postDataWithoutToken(payload, routes.signup()),
     onSuccess: (requestParams) => {
       const resData = requestParams?.data || {};
-      // console.log(requestParams?.data);
-       handleSuccess(resData);
+      console.log("Signup Response Data:", resData);
+      if (handleSuccess) {
+        handleSuccess(resData); // Ensure handleSuccess is defined before calling
+      }
     },
   });
 
   return {
-    signupData: data?.message|| "",
-    signupError: ErrorHandler(error),
+    signupData: data || {}, // Prevent returning undefined
+    signupError: error ? ErrorHandler(error) : null, // Ensure error handling is safe
     signupIsLoading: isPending,
     signupPayload: (requestPayload) => mutate(requestPayload),
-    signupIsSuccess: isSuccess
+    signupIsSuccess: isSuccess,
   };
 };
+
+
 
 export const useVerifyEmail =(handleSuccess)=>{
   const { data, error, isPending, mutate } = useMutateItem({
