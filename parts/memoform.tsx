@@ -128,12 +128,12 @@ const MemoFormScreen = () => {
             control={form.control}
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="required">Food Restaurant Name</FormLabel>
+                <FormLabel className="required">Food Business Name</FormLabel>
                 <FormControl>
                   <Input
                     className="rounded-2xl"
                     {...field}
-                    placeholder="Enter Restaurant Name"
+                    placeholder="Enter Business Name"
                   />
                 </FormControl>
               </FormItem>
@@ -146,13 +146,13 @@ const MemoFormScreen = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="required">
-                  Food Restaurant Address
+                  Food Business Address
                 </FormLabel>
                 <FormControl>
                   <Input
                     className="rounded-2xl"
                     {...field}
-                    placeholder="Enter Restaurant Address"
+                    placeholder="Enter Business Address"
                   />
                 </FormControl>
               </FormItem>
@@ -193,7 +193,7 @@ const MemoFormScreen = () => {
             render={() => (
               <FormItem>
                 <FormLabel className="required">
-                  What features do you want to use?
+                  What features would you want to use?
                 </FormLabel>
                 <div className="grid grid-cols-2 gap-2">
                   {featureOptions.map((feature) => (

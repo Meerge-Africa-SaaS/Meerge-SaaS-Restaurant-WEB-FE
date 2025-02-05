@@ -72,7 +72,7 @@ const Profile: FC<ProfileProps> = ({ image, email, emailIsVerified,phoneIsVerifi
         </div>
         <div className="my-10">
           <h3>Role</h3>
-          <p className="flex gap-4 my-4 text-slate-800 my-1">{role || "Business Admin"}</p>
+          <p className="flex gap-4 my-4 text-slate-800 ">{role || "Business Admin"}</p>
         </div>
       </div>
       {/* {viewModal && (
