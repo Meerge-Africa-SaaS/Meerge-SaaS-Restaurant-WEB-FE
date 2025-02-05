@@ -1,23 +1,22 @@
 import { ProfileEditIcon } from "@/public/assets/svgs";
 import React, { FC } from "react";
+import { Button } from "../ui/button";
 
 interface Props {
   viewModal?: boolean;
-  setViewModal: (value: boolean) => void;
+  setViewModal?: (value: boolean) => void;
+  datamodalTrigger?: string
 }
 
-const ProfileEditBtn: FC<Props> = ({ setViewModal }) => {
-  const handleClick = () => {
-    setViewModal(true);
-  };
-
+const ProfileEditBtn: FC<Props> = ({ setViewModal,datamodalTrigger }) => {
   return (
-    <button
-      className="text-[#FF4101] flex items-center gap-2 cursor-pointer"
-      onClick={handleClick}
+    <Button 
+      data-modal-trigger={datamodalTrigger}
+      className="text-[#FF4101] bg-none outline-none flex items-center gap-2 cursor-pointer"
+      variant="ghost"
     >
       <span>Edit</span> <ProfileEditIcon />
-    </button>
+    </Button>
   );
 };
 

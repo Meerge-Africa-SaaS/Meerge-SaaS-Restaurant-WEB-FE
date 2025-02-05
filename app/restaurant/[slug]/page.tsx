@@ -124,7 +124,7 @@ const emptyData = {
 export default function Home() {
   const { demo } = useContext(DemoContext);
   const data = demo ? dashboardData : emptyData;
-  const [isUserVerified,setIsUserVerified]=useState(false)
+  const [isUserVerified,setIsUserVerified]=useState(true)
   const [isModalOpen, setIsModalOpen] = useState(isUserVerified);
   const handeleUserVerificationStatus =()=>{
     if(!isUserVerified){

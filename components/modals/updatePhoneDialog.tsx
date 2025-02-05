@@ -18,13 +18,13 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import React, { useState } from "react";
 import { useZodForm } from "@/lib/hooks/form";
-import { UpdateEmailSchema } from "@/lib/schema/updateInfo";
+import { UpdatePhoneSchema } from "@/lib/schema/updateInfo";
 
-const UpdateEmailDialogue = () => {
+const UpdatePhoneDialog = () => {
   const [open, setOpen] = useState(false);
 
   const form = useZodForm({
-    schema: UpdateEmailSchema,
+    schema: UpdatePhoneSchema,
   });
 
   const onSubmit = form.handleSubmit(async (data) => {
@@ -32,7 +32,7 @@ const UpdateEmailDialogue = () => {
       form.reset();
       setOpen(false);
     } catch (error) {
-      console.error("Failed to update email:", error);
+      console.error("Failed to update phone:", error);
     }
   });
 
@@ -40,25 +40,25 @@ const UpdateEmailDialogue = () => {
     <Form {...form}>
       <form onSubmit={onSubmit} className="space-y-4">
         <Modal
-          id="update-profile-email"
+          id="update-profile-phone"
           onClose={() => setOpen(false)}
           onOpen={() => setOpen(true)}
           isOpen={open}
         >
           <Modal.Header>
-            <h2 className="text-lg font-semibold">Update Email</h2>
+            <h2 className="text-lg font-semibold">Update Phone Number</h2>
           </Modal.Header>
           <Modal.Body>
             <FormField
               control={form.control}
-              name="email"
+              name="phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-medium required">Email</FormLabel>
+                  <FormLabel className="text-sm font-medium">Phone Number</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="Enter your email"
-                      {...field}
+                    <Input 
+                      placeholder="Enter your phone number" 
+                      {...field} 
                       className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500"
                     />
                   </FormControl>
@@ -77,9 +77,9 @@ const UpdateEmailDialogue = () => {
               >
                 Cancel
               </Button>
-              <Button
-                type="submit"
-                disabled={form.formState.isSubmitting}
+              <Button 
+                type="submit" 
+                disabled={form.formState.isSubmitting} 
                 className="bg-[#0E2254] text-white hover:bg-[#0e2254e3]"
               >
                 Update
@@ -92,4 +92,4 @@ const UpdateEmailDialogue = () => {
   );
 };
 
-export default UpdateEmailDialogue;
+export default UpdatePhoneDialog;
