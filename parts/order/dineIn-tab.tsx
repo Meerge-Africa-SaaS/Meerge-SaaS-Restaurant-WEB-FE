@@ -60,24 +60,6 @@ const DineInTab = ({}) => {
             name="Basmati Fried Rice with Curry"
             onAddToCart={() => ""}
           />
-          <MenuFoodCard
-            amount="N5,000.00"
-            imageUrl="/images/food/food-2.png"
-            name="Basmati Fried Rice with Curry"
-            onAddToCart={() => ""}
-          />
-          <MenuFoodCard
-            amount="N5,000.00"
-            imageUrl="/images/food/food-2.png"
-            name="Basmati Fried Rice with Curry"
-            onAddToCart={() => ""}
-          />
-          <MenuFoodCard
-            amount="N5,000.00"
-            imageUrl="/images/food/food-2.png"
-            name="Basmati Fried Rice with Curry"
-            onAddToCart={() => ""}
-          />
         </div>
       </div>
     </div>
