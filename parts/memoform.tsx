@@ -24,6 +24,7 @@ const MemoFormScreen = () => {
   const handleSubmit = form.handleSubmit(async (data) => {
     console.log(data);
   });
+  const sessionType = form.watch("demoSessionType")
 
   return (
     <div className="max-w-xl mx-auto px-4 py-10">
@@ -140,6 +141,7 @@ const MemoFormScreen = () => {
               </RadioGroup>
             </FormItem>
           )} />
+          {sessionType === "physical" && <div>physical</div> }
 
           {/* Availability Selections */}
           {[{ name: "timeAvailable", options: sessionTimes, placeholder: "Time Available" },
