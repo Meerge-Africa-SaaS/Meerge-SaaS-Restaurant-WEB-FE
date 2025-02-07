@@ -34,7 +34,8 @@ const EmailVerificationPage = () => {
 
   useEffect(() => {
     if (message === messages.EMAIL_VERIFIED && verifyClicked) {
-      router.replace("/restaurant/email-verification/done");
+      // router.replace("/restaurant/email-verification/done");
+      alert("Mail sent")
     }
     // if (resendEmaiError !== "handleSuccess is not a function" && verifyClicked) {
     //   router.replace("/restaurant/email-verification/failed");

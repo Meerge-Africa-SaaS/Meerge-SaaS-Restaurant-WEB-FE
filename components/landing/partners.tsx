@@ -53,22 +53,21 @@ const PartnersSection = () => {
       </span>
 
       <div className="grid grid-cols-3 gap-4 w-full mt-10 pb-28">
-  {partners.map((partner, index) => (
-    <div
-      key={index}
-      className={`flex justify-center items-center ${
-        partner.addTopMargin ? "mt-8" : ""
-      }`}
-    >
-        <img
-          src={partner.logo}
-          alt={`${partner.name} logo`}
-          className="object-cover"
-        />
-    </div>
-  ))}
-</div>
-
+        {partners.map((partner, index) => (
+          <div
+            key={index}
+            className={`flex justify-center items-center ${
+              partner.addTopMargin ? "mt-8" : ""
+            }`}
+          >
+            <img
+              src={partner.logo}
+              alt={`${partner.name} logo`}
+              className="object-cover"
+            />
+          </div>
+        ))}
+      </div>
     </section>
   );
 };
