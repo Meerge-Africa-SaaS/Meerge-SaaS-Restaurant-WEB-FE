@@ -35,6 +35,11 @@ const partners: Partner[] = [
     logo: "/assets/red.png",
     addTopMargin: true,
   },
+  {
+    name: "Eatto Wealth",
+    logo: "/images/eatto.jpeg",
+    addTopMargin: true,
+  },
 ];
 
 const PartnersSection = () => {

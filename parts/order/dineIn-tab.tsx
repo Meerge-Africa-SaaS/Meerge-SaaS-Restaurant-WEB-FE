@@ -17,7 +17,7 @@ const DineInTab = ({}) => {
         <h1 className="text-3xl font-thin border-b border-gray-300 pb-2 mb-4">
           Select Menu Item
         </h1>
-        <div className="flex gap-5 overflow-x-auto scroll-smooth">
+        <div className="flex gap-5 flex-wrap sm:justify-center lg:justify-normal sm:m-auto">
           <MenuFoodCard
             amount="N5,000.00"
             imageUrl="/images/food/food-2.png"
