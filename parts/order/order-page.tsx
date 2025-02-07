@@ -1,3 +1,4 @@
+"use client"
 import OrderBtn from "@/components/btns/orderbtn";
 import Navbar from "@/components/ui/navbar";
 import {
@@ -19,8 +20,23 @@ import {
 } from "@/public/assets/svgs";
 import Image from "next/image";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 const OrderPage = () => {
+  const router = useRouter()
+
+  function routeToDinein(){
+    router.replace(`/restaurant/dashboard/orders/dine-in`)
+  }
+  function routeToTakeout(){
+    router.replace(`/restaurant/dashboard/orders/take-out`)
+  }
+  function routeToReservation(){
+    router.replace(`/restaurant/dashboard/orders/reservation`)
+  }
+  function routeToDelivery(){
+    router.replace(`/restaurant/dashboard/orders/delivery`)
+  }
   return (
     <div>
       <div className="bg-white m-10 rounded-lg shadow">
@@ -29,10 +45,10 @@ const OrderPage = () => {
             All Orders
           </h1>
           <div className="flex flex-wrap justify-center md:justify-start gap-3 md:gap-5">
-            <OrderBtn text="Dine-in" icon={<DineinIcon />} />
-            <OrderBtn text="Take-out" icon={<TakeOutIcon />} />
-            <OrderBtn text="Reservation" icon={<ReservationIcon />} />
-            <OrderBtn text="Delivery" icon={<DeliveryIcon />} />
+            <OrderBtn text="Dine-in" icon={<DineinIcon /> } onClick={routeToDinein} />
+            <OrderBtn text="Take-out" icon={<TakeOutIcon />} onClick={routeToTakeout}/>
+            <OrderBtn text="Reservation" icon={<ReservationIcon />}onClick={routeToReservation}/>
+            <OrderBtn text="Delivery" icon={<DeliveryIcon />} onClick={routeToDelivery}/>
           </div>
         </div>
         <Table className="border border-gray-300">
