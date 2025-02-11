@@ -28,6 +28,10 @@ import {
   RegisteredBusinessSchema,
   UnregisteredBusinessSchema,
 } from "@/lib/schema/authentication";
+import { useOnboardingStepOne } from "@/services/auth";
+import { banks } from "@/lib/utils/data";
+import RegisteredBusinessDocUpload from "@/parts/onbording/registerBusinessDocUpload";
+import UnregisteredBusinessDocUpload from "@/parts/onbording/unregisterdBusinessDocUpload";
 
 type FormData = {
   basicInfo: z.infer<typeof BasicInfoSchema> | null;
@@ -55,10 +59,20 @@ const OnboardingWizard = () => {
   const unregisteredBusinessForm = useZodForm({
     schema: UnregisteredBusinessSchema,
   });
+  const {
+    onboardingStepOneError,
+    onboardingStepOneIsLoading,
+    onboardingStepOnePayload,
+  } = useOnboardingStepOne((res: any) => {
+    console.log("response from page onboarding step one", res);
+  });
 
   const handleBasicInfoSubmit = basicInfoForm.handleSubmit((data) => {
     setFormData({ ...formData, basicInfo: data });
+    const { business_registration_status, ...filteredData } = data;
     setActiveStep(1);
+    console.log(filteredData);
+    onboardingStepOnePayload(data.business_registration_status);
   });
 
   const handleDocumentsSubmit = async (
@@ -71,8 +85,8 @@ const OnboardingWizard = () => {
         ...formData.basicInfo,
         ...data,
       };
-      console.log("Final form data:", finalData);
-      router.push("/restaurant/demo");
+      console.log("Final form data:", data);
+      // router.push("/restaurant/demo");
     } catch (error) {
       console.error("Error submitting form:", error);
     } finally {
@@ -180,6 +194,69 @@ const OnboardingWizard = () => {
                 )}
               />
 
+              <div>
+                <h1 className="font-bold my-5">Account Information</h1>
+                <FormField
+                  control={basicInfoForm.control}
+                  name="bank_name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="required">Bank Name</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select Bank" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {banks.map((bank) => (
+                            <SelectItem value={bank.code}>
+                              {bank.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={basicInfoForm.control}
+                  name="account_number"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="required">Account Number</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Enter business account number"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={basicInfoForm.control}
+                  name="account_name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="required">Account Name</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Enter business account name"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
               <FormField
                 control={basicInfoForm.control}
                 name="business_registration_status"
@@ -219,86 +296,15 @@ const OnboardingWizard = () => {
       case 1:
         const isRegistered =
           formData.basicInfo?.business_registration_status === "registered";
-        const currentForm = isRegistered
-          ? registeredBusinessForm
-          : unregisteredBusinessForm;
-        // @ts-expect-error - It's okay to ignore this error
-        const handleSubmit = currentForm.handleSubmit(handleDocumentsSubmit);
-
+        const isUnregistered =
+          formData.basicInfo?.business_registration_status === "unregistered";
+        
         return (
-          // @ts-expect-error - It's okay to ignore this error
-          <Form
-            {...(isRegistered
-              ? registeredBusinessForm
-              : unregisteredBusinessForm)}
-          >
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {isRegistered && (
-                <FormField
-                  control={registeredBusinessForm.control}
-                  name="business_registration_number"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="required">
-                        Registration Number
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Enter registration number"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              )}
+          <>
+            {isRegistered ? <RegisteredBusinessDocUpload goBack={goBack}/> : ""}
+            {isUnregistered ? <UnregisteredBusinessDocUpload goBack={goBack}/> : ""}
 
-              {isRegistered && (
-                <FormField
-                  control={unregisteredBusinessForm.control}
-                  // @ts-expect-error - It's okay to ignore this error
-                  name="business_document"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="required">
-                        Business Document
-                      </FormLabel>
-                      <FormControl>
-                        <FileDropzone {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              )}
-
-              <FormField
-                // @ts-expect-error - It's okay to ignore this error
-                control={currentForm.control}
-                name="premises_license"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="required">Premises License</FormLabel>
-                    <FormControl>
-                      <FileDropzone {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <div className="flex justify-end gap-2">
-                <Button type="button" variant="outline" onClick={goBack}>
-                  Previous
-                </Button>
-                <Button type="submit" disabled={isLoading}>
-                  {isLoading ? <Loader className="animate-spin mr-2" /> : null}
-                  Submit
-                </Button>
-              </div>
-            </form>
-          </Form>
+          </>
         );
 
       default:

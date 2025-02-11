@@ -47,12 +47,6 @@ const EmailVerificationPage = () => {
       <div className="w-full max-w-md flex flex-col items-center text-center space-y-6 mx-auto">
         {/* Logo */}
         <div className="flex flex-col items-center mb-8">
-          {/* <div className="flex items-center gap-2 mb-4">
-            <p className="text-3xl font-semibold space-x-1">
-              <span className="text-secondary">Meerge</span>
-              <span className="text-primary">Africa</span>
-            </p>
-          </div> */}
           <Logo/>
         </div>
 

@@ -31,20 +31,23 @@ const FileDropzone = ({
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
+      if (acceptedFiles.length === 0) return;
+
       const uploadedFile = acceptedFiles[0];
-      if (uploadedFile) {
+      console.log("Dropped File:", uploadedFile); // Debugging
+
+      if (uploadedFile instanceof File) {
         setFile(uploadedFile);
-        // For images, create preview
+        onChange?.(uploadedFile);
+
+        // Generate preview for images
         if (uploadedFile.type.startsWith("image/")) {
           const reader = new FileReader();
-          reader.onload = () => {
-            setPreview(reader.result as string);
-          };
+          reader.onload = () => setPreview(reader.result as string);
           reader.readAsDataURL(uploadedFile);
         } else {
           setPreview(null);
         }
-        onChange?.(uploadedFile);
       }
     },
     [onChange]
@@ -62,56 +65,55 @@ const FileDropzone = ({
     onChange?.(undefined);
   };
 
+  // Sync external value (prop) with internal state
   useEffect(() => {
-    if (value && value instanceof File) {
+    if (value instanceof File) {
       setFile(value);
       if (value.type.startsWith("image/")) {
         const reader = new FileReader();
-        reader.onload = () => {
-          setPreview(reader.result as string);
-        };
+        reader.onload = () => setPreview(reader.result as string);
         reader.readAsDataURL(value);
+      } else {
+        setPreview(null);
       }
+    } else {
+      setFile(null);
+      setPreview(null);
     }
   }, [value]);
 
-  if (file) {
-    return (
-      <div className="relative w-full p-4 bg-gray-50 rounded-lg border border-gray-200">
-        <div className="flex items-center gap-3">
-          {preview ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={preview}
-              alt="Preview"
-              className="w-16 h-16 object-cover rounded"
-            />
-          ) : (
-            <div className="w-16 h-16 bg-gray-100 rounded flex items-center justify-center">
-              <FileText size={24} className="text-gray-400" />
-            </div>
-          )}
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-gray-900 truncate">
-              {file.name}
-            </p>
-            <p className="text-sm text-gray-500">
-              {(file.size / 1024 / 1024).toFixed(2)} MB
-            </p>
+  return file ? (
+    <div className="relative w-full p-4 bg-gray-50 rounded-lg border border-gray-200">
+      <div className="flex items-center gap-3">
+        {preview ? (
+          <img
+            src={preview}
+            alt="Preview"
+            className="w-16 h-16 object-cover rounded"
+          />
+        ) : (
+          <div className="w-16 h-16 bg-gray-100 rounded flex items-center justify-center">
+            <FileText size={24} className="text-gray-400" />
           </div>
-          <button
-            onClick={removeFile}
-            className="p-1 bg-white rounded-full shadow-sm hover:bg-gray-100 border border-gray-200"
-            aria-label="Remove file"
-          >
-            <X size={16} className="text-gray-600" />
-          </button>
+        )}
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-medium text-gray-900 truncate">
+            {file.name}
+          </p>
+          <p className="text-sm text-gray-500">
+            {(file.size / 1024 / 1024).toFixed(2)} MB
+          </p>
         </div>
+        <button
+          onClick={removeFile}
+          className="p-1 bg-white rounded-full shadow-sm hover:bg-gray-100 border border-gray-200"
+          aria-label="Remove file"
+        >
+          <X size={16} className="text-gray-600" />
+        </button>
       </div>
-    );
-  }
-
-  return (
+    </div>
+  ) : (
     <div
       {...getRootProps()}
       className={`w-full border-2 border-dashed rounded-lg flex items-center justify-center cursor-pointer transition-colors ${

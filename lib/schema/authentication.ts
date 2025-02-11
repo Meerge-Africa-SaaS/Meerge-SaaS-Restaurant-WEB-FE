@@ -27,35 +27,28 @@ export const BasicInfoSchema = z.object({
   business_address: z.string().min(5, "Enter a valid address"),
   business_category: z.string().min(1, "Select a business category"),
   business_registration_status: z.enum(["registered", "unregistered"]),
+  bank_name:z.string().min(1, "Select a bank"),
+  account_number: z.string().min(10, "Enter a valid account number"),
+  account_name: z.string().min(2, "Account name must be at least 2 characters")
 });
 
 export const RegisteredBusinessSchema = z.object({
   business_registration_number: z
     .string()
     .min(1, "Registration number is required"),
-  business_document: z
-    .any()
-    .optional()
-    .refine((file) => file instanceof File, {
-      message: "Business document must be a valid file",
-    }),
-  premises_license: z
-    .any()
-    .optional()
-    .refine((file) => file instanceof File, {
-      message: "Premises license must be a valid file",
-    }),
+    business_document: typeof File !== "undefined" 
+    ? z.optional(z.instanceof(File)) 
+    : z.any(),
+
+  business_premise_license: typeof File !== "undefined" 
+    ? z.optional(z.instanceof(File)) 
+    : z.any(),
 });
 
 // Schema for Step 2b (Unregistered Business)
 export const UnregisteredBusinessSchema = z.object({
-  premises_license: z
-    .any()
-    .optional()
-    .refine((file) => file instanceof File, {
-      message: "Premises license must be a valid file",
-    }),
-});
+  business_premise_license: typeof window === 'undefined' ? z.any() : z.instanceof(File),
+})
 
 export const changePasswordSchema = z
   .object({

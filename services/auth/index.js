@@ -14,14 +14,14 @@ export const useSignup = (handleSuccess) => {
       const resData = requestParams?.data || {};
       console.log("Signup Response Data:", resData);
       if (handleSuccess) {
-        handleSuccess(resData); // Ensure handleSuccess is defined before calling
+        handleSuccess(resData); 
       }
     },
   });
 
   return {
-    signupData: data || {}, // Prevent returning undefined
-    signupError: error ? ErrorHandler(error) : null, // Ensure error handling is safe
+    signupData: data || {}, 
+    signupError: error ? ErrorHandler(error) : null, 
     signupIsLoading: isPending,
     signupPayload: (requestPayload) => mutate(requestPayload),
     signupIsSuccess: isSuccess,
@@ -132,3 +132,44 @@ export const useResendEmail =(handleSuccess)=>{
     resendEmaiPayload: (requestPayload) => mutate(requestPayload),
   };
 }
+export const useOnboardingStepOne = (handleSuccess) => {
+  const { data, error, isPending, mutate, isSuccess } = useMutateItem({
+    mutationFn: (payload) => httpService.postDataWithoutToken(payload, routes.onboardingStepOne()),
+    onSuccess: (requestParams) => {
+      const resData = requestParams?.data || {};
+      console.log("onboardingStepOne Response Data:", resData);
+      if (handleSuccess) {
+        handleSuccess(resData); 
+      }
+    },
+  });
+
+  return {
+    onboardingStepOneData: data || {}, 
+    onboardingStepOneError: error ? ErrorHandler(error) : null, 
+    onboardingStepOneIsLoading: isPending,
+    onboardingStepOnePayload: (requestPayload) => mutate(requestPayload),
+    onboardingStepOneIsSuccess: isSuccess,
+  };
+};
+
+export const useOnboardingStepTwo = (handleSuccess) => {
+  const { data, error, isPending, mutate, isSuccess } = useMutateItem({
+    mutationFn: (payload) => httpService.postDataWithoutToken(payload, routes.onboardingStepTwo()),
+    onSuccess: (requestParams) => {
+      const resData = requestParams?.data || {};
+      console.log("onboardingStepTwo Response Data:", resData);
+      if (handleSuccess) {
+        handleSuccess(resData); 
+      }
+    },
+  });
+
+  return {
+    onboardingStepTwoData: data || {}, 
+    onboardingStepTwoError: error ? ErrorHandler(error) : null, 
+    onboardingStepTwoIsLoading: isPending,
+    onboardingStepTwoPayload: (requestPayload) => mutate(requestPayload),
+    onboardingStepTwoIsSuccess: isSuccess,
+  };
+};
