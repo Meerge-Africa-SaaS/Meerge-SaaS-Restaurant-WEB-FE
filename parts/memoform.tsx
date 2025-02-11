@@ -252,7 +252,13 @@ const MemoFormScreen = () => {
           />
 
           {sessionType === "physical" && (
-            <Input value={"lagos"}/>
+            <FormItem>
+              <Label>
+                Nearest Bus-Stop
+              </Label>
+              <Input value={"lagos"} />
+
+            </FormItem>
           )}
 
           {/* Availability Selections */}
@@ -275,7 +281,7 @@ const MemoFormScreen = () => {
           ].map(({ name, options, placeholder }) => (
             <FormField
               key={name}
-               //@ts-ignore
+              //@ts-ignore
               name={name}
               control={form.control}
               render={() => (
